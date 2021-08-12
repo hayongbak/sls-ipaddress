@@ -1,0 +1,28 @@
+service: app
+
+provider:
+    name: aws
+    region: us-east-1
+    runtime: provided.al2
+    profile: impakt
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    ipaddress:
+        handler: index.php
+        description: ''
+        layers:
+            - ${bref:layer.php-74}
+        events:
+            - httpApi: '*'
+            - schedule:
+                rate: rate(5 minutes)
+                input:
+                    warmer: true
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '!tests/**'

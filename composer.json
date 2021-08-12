@@ -1,0 +1,6 @@
+{
+    "require": {
+        "bref/bref": "^1.2",
+        "bref/logger": "^1.0"
+    }
+}
